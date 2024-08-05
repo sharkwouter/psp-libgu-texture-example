@@ -17,7 +17,7 @@ PSP_MAIN_THREAD_ATTR(THREAD_ATTR_VFPU | THREAD_ATTR_USER);
 typedef struct
 {
     float u, v;
-    unsigned int colour;
+    uint32_t colour;
     float x, y, z;
 } TextureVertex;
 
@@ -38,8 +38,8 @@ Texture texture;
 void initGu(){
     sceGuInit();
 
-    fbp0 = getStaticVramBuffer(BUFFER_WIDTH, BUFFER_HEIGHT, GU_PSM_8888);
-    fbp1 = getStaticVramBuffer(BUFFER_WIDTH, BUFFER_HEIGHT, GU_PSM_8888);
+    fbp0 = guGetStaticVramBuffer(BUFFER_WIDTH, BUFFER_HEIGHT, GU_PSM_8888);
+    fbp1 = guGetStaticVramBuffer(BUFFER_WIDTH, BUFFER_HEIGHT, GU_PSM_8888);
 
     //Set up buffers
     sceGuStart(GU_DIRECT, list);
@@ -86,12 +86,12 @@ void drawTexture(float x, float y, float w, float h) {
         {w, h, 0xFFFFFFFF, x + w, y + h, 0.0f},
     };
 
-    sceGuTexMode(GU_PSM_T8, 0, 0, GU_FALSE);
+    sceGuTexMode(GU_PSM_8888, 0, 0, GU_FALSE);
     sceGuTexFunc(GU_TFX_REPLACE, GU_TCC_RGB);
     sceGuTexImage(0, texture.width, texture.height, texture.width, texture.data);
 
-    sceGuEnable(GU_TEXTURE_2D);  
-    sceGuDrawArray(GU_SPRITES, GU_COLOR_8888 | GU_TEXTURE_AUTO | GU_VERTEX_32BITF | GU_TRANSFORM_2D, 2, 0, vertices);
+	sceGuEnable(GU_TEXTURE_2D); 
+    sceGuDrawArray(GU_SPRITES, GU_COLOR_8888 | GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_2D, 2, 0, vertices);
     sceGuDisable(GU_TEXTURE_2D);
 }
 
