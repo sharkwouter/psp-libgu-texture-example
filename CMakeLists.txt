@@ -19,3 +19,5 @@ create_pbp_file(
     TITLE ${PROJECT_NAME}
     VERSION 01.00
 )
+
+file(COPY grass.png DESTINATION ${CMAKE_BINARY_DIR})
