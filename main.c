@@ -90,7 +90,7 @@ void drawTexture(float x, float y, float w, float h) {
     sceGuTexFunc(GU_TFX_REPLACE, GU_TCC_RGB);
     sceGuTexImage(0, texture.width, texture.height, texture.width, texture.data);
 
-	sceGuEnable(GU_TEXTURE_2D); 
+    sceGuEnable(GU_TEXTURE_2D); 
     sceGuDrawArray(GU_SPRITES, GU_COLOR_8888 | GU_TEXTURE_32BITF | GU_VERTEX_32BITF | GU_TRANSFORM_2D, 2, 0, vertices);
     sceGuDisable(GU_TEXTURE_2D);
 }
