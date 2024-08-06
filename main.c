@@ -80,11 +80,21 @@ void endFrame(){
 }
 
 void drawTexture(float x, float y, float w, float h) {
+    static TextureVertex vertices[2];
 
-    TextureVertex vertices[2] = {
-        {0.0f, 0.0f, 0xFFFFFFFF, x, y, 0.0f},
-        {w, h, 0xFFFFFFFF, x + w, y + h, 0.0f},
-    };
+    vertices[0].u = 0.0f;
+    vertices[0].v = 0.0f;
+    vertices[0].colour = 0xFFFFFFFF;
+    vertices[0].x = x;
+    vertices[0].y = y;
+    vertices[0].z = 0.0f;
+
+    vertices[1].u = w;
+    vertices[1].v = h;
+    vertices[1].colour = 0xFFFFFFFF;
+    vertices[1].x = x + w;
+    vertices[1].y = y + h;
+    vertices[1].z = 0.0f;
 
     sceGuTexMode(GU_PSM_8888, 0, 0, GU_FALSE);
     sceGuTexFunc(GU_TFX_REPLACE, GU_TCC_RGB);
